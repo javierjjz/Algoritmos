@@ -1,0 +1,51 @@
+// Primer Menu.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+
+using namespace std;
+
+void main()
+{
+	float a,b,r,s,m,d;
+	int op;
+	cout<<"Ingrese el valor de: ";
+	cin>>a;
+	cout<<"Ingrese el valor de: ";
+	cin>>b;
+	do{
+		cout<<"---------MENU-----------"<<endl;
+		cout<<"1. Suma "<<endl;
+		cout<<"2. Resta "<<endl;
+		cout<<"3. Multiplicacion "<<endl;
+		cout<<"4. Division "<<endl;
+		cout<<"0. Salir "<<endl;
+			cout<<"Elija una opcion: "<<endl;
+		cin>>op;
+		switch(op)
+		{
+		case 1: 
+			s=a+b;
+			cout<<"La suma es: "<<s<<endl;
+			break;
+		case 2:
+			r=a-b;
+			cout<<"La resta es: "<<r<<endl;
+			break;
+		case 3: 
+			m=a*b;
+			cout<<"La multiplicacion es: "<<m<<endl;
+			break;
+		case 4:
+			d=a/b;
+			cout<<"La division es: "<<d<<endl;
+			break;
+		case 0: cout<<"SALIR"<<endl;
+			break;
+		default: cout<<"opcion invalida, elija otra opcion: ";
+		}
+		}while(op!=0);
+	_getch();
+}
