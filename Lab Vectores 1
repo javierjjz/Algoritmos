@@ -1,0 +1,109 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+void cargar(int v[],int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout<<"Ingresar elemento: ";
+		cin>>v[i];
+	}
+}
+
+void mostrar(int v[],int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout<<"V["<<i<<"] = "<<v[i]<<endl;
+	}
+}
+
+bool verifPrimo(int n){
+	int i;
+	bool k=true;
+	for(i=2;i<n;i++){
+		if(n%i==0){
+			k=false;
+		}
+	}
+	return (k);
+}
+
+void borrarPrimos(int v[],int &n){
+	int i,k;
+	for(i=0;i<n;i++){
+		if(verifPrimo(v[i])==true){
+			for(k=i;k<n-1;k++){
+			v[k]=v[k+1];
+			}
+			n--;
+			i--;
+		}
+	}
+}
+
+int nPrimo(int n){
+	int c=0,d=0;
+	while(d<n){
+		c++;
+		if(verifPrimo(c)==true){
+			d++;
+		}
+	}
+	return (c);
+}
+
+void secPrimoSaltado(int v[],int n){
+	int i,k=0,asc=0,desc=n-1;
+	for(i=0;i<n;i++){
+			if(k==0){
+			v[asc++]=nPrimo(i+1);
+			k=1;
+		}
+		else{
+			if(k==1){
+				v[desc--]=nPrimo(i+1);
+				k=0;
+			}
+		}
+	}
+}
+
+void ordenar(int v[], int n){
+	int i,aux,j;
+	for(i=0;i<n-1;i++){
+		for(j=i+1;j<n;j++)
+		if(v[i]>v[j]){
+			aux=v[j];
+			v[j]=v[i];
+			v[i]=aux;
+		}
+	}
+}
+
+
+void main(){
+	int n,v[30];
+	cout<<"Ingrese la cantidad de elementos: ";
+	cin>>n;
+
+	
+	cargar(v,n);
+	cout<<endl<<"La secuencia de Primos es:"<<endl;
+	secPrimoSaltado(v,n);
+	mostrar(v,n);
+
+	
+	cargar(v,n);
+	cout<<endl<<"El vector ordenado queda asi: "<<endl;
+	ordenar(v,n);
+	mostrar(v,n);
+
+	cargar(v,n);
+	mostrar(v,n);
+	cout<<endl<<"El vector sin primos queda asi"<<endl;
+	borrarPrimos(v,n);
+	mostrar(v,n);
+
+
+	system("pause");
+}
