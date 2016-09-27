@@ -1,0 +1,105 @@
+#include <conio.h>
+#include <iostream>
+using namespace std;
+#define FIL 20
+#define COL 20
+
+void cargarMat(int mat[FIL][COL],int n,int m){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			cout<<"Ingresar elemento Mat["<<i<<"]["<<j<<"]: ";
+			cin>>mat[i][j];
+		}
+	}
+}
+
+void mostrarMat(int mat[FIL][COL],int n,int m){
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			cout<<mat[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+}
+
+int mayor(int mat[FIL][COL],int n,int m){
+	int i,j,may=mat[0][0];
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			if(mat[i][j]>may){
+				may=mat[i][j];
+			}
+		}
+	}
+	return (may);
+}
+
+void ordenarVec(int vec[],int n){
+	int i,j,aux;
+	for(i=0;i<n;i++){
+		for(j=i+1;j<n;j++){
+			if(vec[i]>vec[j]){
+				aux=vec[i];
+				vec[i]=vec[j];
+				vec[j]=aux;
+			}
+		}
+	}
+}
+
+void ordenarMat(int mat[FIL][COL],int n,int m){
+	int i;
+	for(i=0;i<n;i++){
+			ordenarVec(mat[i],m);
+	}
+}
+
+bool verifPrimo(int n){
+	int i;
+	bool k=true;
+	for(i=2;i<n;i++){
+		if(n%i==0){
+			k=false;
+		}
+	}
+	return k;
+}
+
+void sumaFilaPrimos(int mat[FIL][COL],int n,int m,int vec[]){
+	int i,j,s=0;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			if(verifPrimo(mat[i][j])==true){
+				vec[i]=+mat[i][j];
+			}
+		}
+	}
+}
+void mostrarVec(int vec[],int n){
+	int i;
+	cout<<"El vector es: "<<endl;
+	for(i=0;i<n;i++){
+		cout<<vec[i]<<" ";
+	}
+}
+
+void main(){
+	int n,m,mat[FIL][COL],vec[20];
+	cout<<"Numero de Filas?: ";
+	cin>>n;
+	cout<<"Numero de Columnas?: ";
+	cin>>m;
+	cargarMat(mat,n,m);
+	cout<<endl<<"La matriz queda asi: "<<endl;
+	mostrarMat(mat,n,m);
+	ordenarMat(mat,n,m);
+	cout<<endl<<"La matriz ordenada queda asi: "<<endl;
+	mostrarMat(mat,n,m);
+	cout<<endl<<"El mayor elemento es: "<<mayor(mat,n,m)<<endl;
+	sumaFilaPrimos(mat,n,m,vec);
+	cout<<"La suma de primos por filas es: "<<endl;
+	mostrarVec(vec,n);
+	system("pause");
+}
